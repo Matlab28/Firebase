@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text" placeholder="Enter msg" id="msg">
+    <button id="addBtn">Send Data</button>
+
+    <script type="module" src="/js/app.js"></script>
+
+    <script type="module">
+         import {db, collection, addDoc} from '/js/app.js'
+         
+         document.getElementById('addBtn').addEventListener('click', addData)
+
+         async function addData() {
+            let msg = document.getElementById('msg').value
+
+            try {
+                const ref = await addDoc(collection(db, 'data'), {message:msg})
+                console.log(ref);
+                alert("done")
+            } catch (error) {
+                console.log('error', error)
+            }
+         }
+    </script>
+</body>
+</html>
